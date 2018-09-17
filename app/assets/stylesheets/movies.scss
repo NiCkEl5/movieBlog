@@ -1,0 +1,16 @@
+// Place all the styles related to the Movies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.movie-table{
+  table-layout: fixed;
+  width: 100%;
+}
+
+p {
+ word-break: break-word;
+}
+
+.body-content{
+  padding: 10px;
+  marginTop: 50px;
+}
