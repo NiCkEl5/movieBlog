@@ -3,7 +3,7 @@ const NavBar = (props) =>
     return (
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <a class="navbar-brand" href="/articles">Movie DB</a>
+                <a class="navbar-brand" href="/">Movie DB</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -20,6 +20,9 @@ const NavBar = (props) =>
                             </div>
                         </li>
                     </ul>
+                </div>
+                <div>
+                    <input type="text" class="form-control" id="searchField" placeholder="Search..." onKeyUp={props.liveSearch}/>
                 </div>
             </nav>
         </header>

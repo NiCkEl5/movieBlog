@@ -3,6 +3,7 @@ class Body extends React.Component {
         super(props);
         this.state = {
             movies: [],
+            allMovies: false,
             display: true
         };
         this.handleUpdate = this.handleUpdate.bind(this);
@@ -11,13 +12,15 @@ class Body extends React.Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
         this.submitNewMovie = this.submitNewMovie.bind(this)
         this.addNewMovie = this.addNewMovie.bind(this)
+        this.liveSearch = this.liveSearch.bind(this)
 
     }
     componentDidMount(){
         if(this.state.display){
             fetch('/api/v1/movies')
                 .then((response) => {return response.json()})
-                .then((data) => {this.setState({ movies: data }) });
+                .then((data) => {this.setState({ movies: data, allMovies: true }) })
+                .catch((error) => console.error('Error:', error));
         }
     }
 
@@ -35,9 +38,9 @@ class Body extends React.Component {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then((response) => {
-            this.updateMovie(movie)
-        })
+            })
+            .then((response) => {this.updateMovie(movie)})
+            .catch((error) => console.error('Error:', error));
     }
 
     updateMovie(movie){
@@ -60,7 +63,7 @@ class Body extends React.Component {
         }).then((response) => {return response.json()})
             .then((movie)=>{
                 this.submitNewMovie(movie)
-            })
+        }).catch((error) => console.error('Error:', error));
     }
 
     submitNewMovie(movie){
@@ -78,6 +81,7 @@ class Body extends React.Component {
                     'Content-Type': 'application/json'
                 }
             }).then((response) => {this.deleteMovie(id)})
+            .catch((error) => console.error('Error:', error));
     }
 
     deleteMovie(id){
@@ -85,6 +89,42 @@ class Body extends React.Component {
         this.setState({
             movies: newMovies
         })
+    }
+
+    liveSearch(event){
+        var cleanSearch = [],
+        newMovies = [];
+
+        event.target.value.split(" ").forEach((element) => {
+            cleanSearch.push(element.replace(/[^a-zA-Z0-9\\-\\' ]*$/g, "").toLowerCase());
+        });
+
+        searchString = cleanSearch.join(' ');
+
+        if(searchString.length > 3){
+            fetch('/api/v1/movies')
+                .then((response) => {return response.json()})
+                .then((data) => {
+                    data.map((movie) => {
+                        if(movie.title.indexOf(searchString) >= 0){
+                            newMovies.push(movie);
+                        }
+                    });
+                    this.setState({
+                        movies: newMovies,
+                        allMovies: false
+                    })
+                })
+                .catch((error) => console.error('Error:', error));
+        }else if(!this.state.allMovies){
+            fetch('/api/v1/movies')
+                .then((response) => {return response.json()})
+                .then((data) => {
+                    this.setState({
+                    movies: data,
+                    allMovies: true})
+                }).catch((error) => console.error('Error:', error));
+        }
     }
 
     render(){
@@ -98,7 +138,7 @@ class Body extends React.Component {
 
         return(
             <div>/
-                <NavBar addNewMovie={this.addNewMovie}/>
+                <NavBar addNewMovie={this.addNewMovie} liveSearch={this.liveSearch}/>
                 {bodyContent}
             </div>
         )
