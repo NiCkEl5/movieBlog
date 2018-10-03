@@ -37,7 +37,7 @@ class Movie extends React.Component{
                     </div>
 
                 </td>
-                <td scope='row'>TBD</td>
+                <td scope='row'><RatingStar movie={this.props.movie} handleUpdate={this.props.handleUpdate} /></td>
             </tr>
         )
     }

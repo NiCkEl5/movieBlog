@@ -12,5 +12,18 @@ p {
 
 .body-content{
   padding: 10px;
-  marginTop: 50px;
+}
+
+.facet-filter{
+  display: inline-flex;
+}
+
+.facet-filter-label{
+  margin-top: auto;
+  margin-right: 5px;
+}
+
+.movie-form{
+  padding: 10px;
+  marginTop: 30px;
 }

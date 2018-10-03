@@ -5,4 +5,4 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-movies = Movie.create([{ title: 'Star Wars', description: 'In a galaxy far, far away', rating: 5 }, { title: 'Lord of the Rings', description: 'Protect the shire', rating: 5 }])
+movies = Movie.create([{ title: 'Star Wars', description: 'In a galaxy far, far away', rating: 5, category: 'SCI-FI' }, { title: 'Lord of the Rings', description: 'Protect the shire', rating: 5 , category: 'SCI-FI'}])

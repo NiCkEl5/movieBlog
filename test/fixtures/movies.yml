@@ -3,9 +3,9 @@
 one:
   title: MyString
   description: MyText
-  rating: 
+  rating: 3
 
 two:
-  title:
+  title: Test
   description: MyText
-  rating: 
+  rating: 4

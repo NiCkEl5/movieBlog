@@ -15,7 +15,8 @@ ActiveRecord::Schema.define(version: 2018_09_05_192040) do
   create_table "movies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
-    t.decimal "rating", precision: 10
+    t.text "category"
+    t.integer "rating", null: false, default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
